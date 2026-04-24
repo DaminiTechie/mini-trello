@@ -1,4 +1,4 @@
- import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import API from '../api/axios';
@@ -20,18 +20,17 @@ export default function BoardView() {
 
   const sensors = useSensors(useSensor(PointerSensor));
 
-  const fetchBoard = async () => {
-    try {
-      const res = await API.get(`/boards/${id}`);
-      setBoard(res.data);
-    } catch (err) {
-      toast.error('Failed to load board');
-    }
-  };
+  const fetchBoard = useCallback(async () => {
+  try {
+    const res = await API.get(`/boards/${id}`);
+    setBoard(res.data);
+  } catch (err) {
+    toast.error('Failed to load board');
+  }
+}, [id]);
 
 useEffect(() => {
   fetchBoard();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [fetchBoard]);
 
   const handleDragEnd = async (event) => {
