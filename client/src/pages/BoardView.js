@@ -29,7 +29,7 @@ export default function BoardView() {
     }
   };
 
-  useEffect(() => { fetchBoard(); }, [id]);
+useEffect(() => { fetchBoard(); }, [id]);
 
   const handleDragEnd = async (event) => {
     const { active, over } = event;
