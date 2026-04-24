@@ -18,7 +18,10 @@ Task.belongsTo(Column, { foreignKey: 'ColumnId' });
 Board.belongsTo(User, { foreignKey: 'UserId' });
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  credentials: true
+}));
 app.use(express.json());
 
 // Routes
