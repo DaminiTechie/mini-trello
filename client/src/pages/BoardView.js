@@ -29,7 +29,10 @@ export default function BoardView() {
     }
   };
 
-useEffect(() => { fetchBoard(); }, [id]);
+useEffect(() => {
+  fetchBoard();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [fetchBoard]);
 
   const handleDragEnd = async (event) => {
     const { active, over } = event;
